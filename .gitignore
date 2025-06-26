@@ -17,8 +17,9 @@ ENV/
 users.db
 *.sqlite3
 
-# Uploads (if users are uploading files)
+#uploads
 static/uploads/
+static/profile_pictures/
 
 # Flask specific
 instance/
