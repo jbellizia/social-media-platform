@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head><title> Upload</title></head>
+<body>
+    <nav>
+        <a href="/home">Home</a>
+        <a href="/upload">Upload a post</a>
+        <a href="/myprofile">View profile</a>
+        <a href="/about">About</a>
+        <a href="/settings">Settings</a>
+        <a href="/logout">Log out</a>
+        
+    </nav>
+    <h2>Upload a post</h2>
+
+    {% with messages = get_flashed_messages(category_filter=["upload"]) %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form method="post" enctype="multipart/form-data">
+        <label for="image">Attach an image (filesize under 2MB):</label>
+        <input type="file" id="image" name="image"><br>
+
+        <label for="caption">Caption:</label>
+        <input id = "caption" name="caption"><br>
+        <input type="submit" value="Post">
+    </form>
+</body>
+</html>

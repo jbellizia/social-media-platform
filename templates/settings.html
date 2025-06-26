@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head><title> Settings</title></head>
+<body>
+    <nav>
+        <a href="/home">Home</a>
+        <a href="/upload">Upload a post</a>
+        <a href="/myprofile">View profile</a>
+        <a href="/about">About</a>
+        <a href="/settings">Settings</a>
+        <a href="/logout">Log out</a>
+        
+    </nav>
+    <h2>Settings</h2>
+
+    {% with messages = get_flashed_messages(category_filter=["settings"]) %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <!-- remove_profile_pic -->
+    <form method="post" enctype="multipart/form-data">
+        <div class="profile-info-settings"> 
+            <div class="profile-info">
+                {% if profile_pic %}
+                <img src="{{ url_for('static', filename='profile_pictures/' + profile_pic) }}" alt="Profile Picture" width="75">
+                {% endif %}
+                <p>{{ username }}</p>
+            </div>
+
+            <label for="profile-pic">Upload a new profile picture</label>
+            <input type="file" id="profile-pic" name="profile-pic"><br>
+
+            <input type="radio" id="remove_profile_pic" name="remove_profile_pic" value="Remove profile picture">
+            <label for="remove_profile_pic">Remove profile picture</label><br>
+            
+            <label for="bio">Bio:</label><br>
+            <textarea name="bio" rows="4" cols="50">{{ bio }}</textarea><br><br>
+
+        </div>
+        <div class="account-info-settings"> 
+            <label for="email">Email </label>
+            <input id="email" name="email" value="{{ email }}"  required><br>
+
+
+            <label for="username">Username </label>
+            <input id="username" name="username" value="{{ username }}"  required><br>
+
+            <a href="/change_password">Change Password</a>
+        </div>
+        <div class="notifications-settings"> 
+            <label>
+                <input type="checkbox" name="notifications_enabled" {% if notifications_enabled %}checked{% endif %}>
+                Enable notifications
+            </label><br><br>
+        </div>
+        
+        <input type="submit" value="Save Settings">
+    </form>
+</body>
+</html>

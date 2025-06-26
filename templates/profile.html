@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head><title> {{ username }}'s Profile</title></head>
+<body>
+    <nav>
+        <a href="/home">Home</a>
+        <a href="/upload">Upload a post</a>
+        <a href="/myprofile">View profile</a>
+        <a href="/about">About</a>
+        <a href="/settings">Settings</a>
+        <a href="/logout">Log out</a>
+        
+    </nav>
+    <h2>{{ username }}'s Profile</h2>
+
+    {% if profile_pic %}
+    <img src="{{ url_for('static', filename='profile_pictures/' + profile_pic) }}" alt="Profile Picture" width="150">
+    {% endif %}
+
+    <p><strong>Bio:</strong> {{ bio or "No bio yet." }}</p>
+
+    <hr>
+
+    <h3>Posts:</h3>
+    {% for caption, image_filename, timestamp in posts %}
+    <div class="post">
+        {% if image_filename %}
+        <img src="{{ url_for('static', filename='uploads/' + image_filename) }}" alt="Post Image" width="300">
+        {% endif %}
+        {% if caption %}
+        <p>{{ caption }}</p>
+        {% endif %}
+        <small>Posted on {{ timestamp }}</small>
+    </div>
+    <hr>
+    {% else %}
+    <p>No posts yet.</p>
+    {% endfor %}
+</body>
+</html>
