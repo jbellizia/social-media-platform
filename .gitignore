@@ -14,6 +14,7 @@ ENV/
 
 # SQLite database
 *.db
+users.db
 *.sqlite3
 
 # Uploads (if users are uploading files)
